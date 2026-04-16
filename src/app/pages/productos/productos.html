@@ -1,0 +1,28 @@
+<h2>Productos</h2>
+
+<div class="grid">
+
+  @for (producto of productos; track producto.id) {
+    
+    <div class="card">
+      <img [src]="producto.imagen" alt="">
+
+      <h3>{{ producto.nombre }}</h3>
+      <p>$ {{ producto.precio }}</p>
+
+      <button (click)="agregar()">
+        Agregar al carrito
+      </button>
+    </div>
+
+  }
+
+</div>
+
+@for (p of productos; track p.id) {
+  <div class="card" (click)="verDetalle(p.id)">
+    <img [src]="p.imagen" width="150">
+    <h3>{{ p.nombre }}</h3>
+    <p>$ {{ p.precio }}</p>
+  </div>
+}

@@ -6,7 +6,9 @@
     <a [routerLink]="['/productos']" [queryParams]="{categoria:'mujer'}" routerLinkActive="active" class="text-white text-decoration-none">Mujer</a>
     <a [routerLink]="['/productos']" [queryParams]="{categoria:'hombre'}" routerLinkActive="active" class="text-white text-decoration-none">Hombre</a>
     <a [routerLink]="['/productos']" [queryParams]="{categoria:'niños'}" routerLinkActive="active" class="text-white text-decoration-none">Niños</a>
-    <a routerLink="/carrito" routerLinkActive="active" class="text-white text-decoration-none">Carrito</a>
+    <a routerLink="/carrito" routerLinkActive="active" class="text-white text-decoration-none">
+       Carrito ({{ carritoService.contador() }})
+    </a>
     <a routerLink="/contacto" routerLinkActive="active" class="text-white text-decoration-none">Contacto</a>
   </div>
 </nav>

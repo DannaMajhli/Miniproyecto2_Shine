@@ -1,1 +1,131 @@
-<p>checkout works!</p>
+<div class="checkout-wrap">
+
+  @if (enviado) {
+    <div class="confirmacion">
+      <div class="icono-ok">✓</div>
+      <h2>¡Pedido confirmado!</h2>
+      <p>Gracias por tu compra. Recibirás un correo con los detalles.</p>
+      <p class="total-final">Total pagado: {{ total | precio }}</p>
+      <button (click)="volverTienda()">Seguir comprando</button>
+    </div>
+  }
+
+  @if (!enviado) {
+    <h2>Finalizar compra</h2>
+    <p class="subtitulo">Total a pagar: <strong>{{ total | precio }}</strong></p>
+
+    <form [formGroup]="form" (ngSubmit)="confirmar()" novalidate>
+
+      <div class="seccion">
+        <h3>Datos personales</h3>
+
+        <div class="campo">
+          <label>Nombre completo</label>
+          <input type="text" formControlName="nombre" placeholder="Tu nombre completo">
+          @if (f['nombre'].invalid && f['nombre'].touched) {
+            @if (f['nombre'].errors?.['required']) {
+              <span class="error">El nombre es obligatorio.</span>
+            }
+            @if (f['nombre'].errors?.['minlength']) {
+              <span class="error">Mínimo 3 caracteres.</span>
+            }
+            @if (f['nombre'].errors?.['pattern']) {
+              <span class="error">Solo se permiten letras.</span>
+            }
+          }
+        </div>
+
+        <div class="campo">
+          <label>Correo electrónico</label>
+          <input type="email" formControlName="email" placeholder="tucorreo@email.com">
+          @if (f['email'].invalid && f['email'].touched) {
+            @if (f['email'].errors?.['required']) {
+              <span class="error">El correo es obligatorio.</span>
+            }
+            @if (f['email'].errors?.['email']) {
+              <span class="error">Ingresa un correo válido.</span>
+            }
+          }
+        </div>
+
+        <div class="campo">
+          <label>Teléfono</label>
+          <input type="tel" formControlName="telefono" placeholder="10 dígitos">
+          @if (f['telefono'].invalid && f['telefono'].touched) {
+            @if (f['telefono'].errors?.['required']) {
+              <span class="error">El teléfono es obligatorio.</span>
+            }
+            @if (f['telefono'].errors?.['pattern']) {
+              <span class="error">Ingresa 10 dígitos numéricos.</span>
+            }
+          }
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h3>Dirección de envío</h3>
+
+        <div class="campo">
+          <label>Dirección</label>
+          <input type="text" formControlName="direccion" placeholder="Calle, número, colonia">
+          @if (f['direccion'].invalid && f['direccion'].touched) {
+            @if (f['direccion'].errors?.['required']) {
+              <span class="error">La dirección es obligatoria.</span>
+            }
+            @if (f['direccion'].errors?.['minlength']) {
+              <span class="error">Mínimo 10 caracteres.</span>
+            }
+          }
+        </div>
+
+        <div class="fila-dos">
+          <div class="campo">
+            <label>Ciudad</label>
+            <input type="text" formControlName="ciudad" placeholder="Tu ciudad">
+            @if (f['ciudad'].invalid && f['ciudad'].touched) {
+              @if (f['ciudad'].errors?.['required']) {
+                <span class="error">La ciudad es obligatoria.</span>
+              }
+            }
+          </div>
+
+          <div class="campo">
+            <label>Código postal</label>
+            <input type="text" formControlName="codigoPostal" placeholder="5 dígitos">
+            @if (f['codigoPostal'].invalid && f['codigoPostal'].touched) {
+              @if (f['codigoPostal'].errors?.['required']) {
+                <span class="error">El CP es obligatorio.</span>
+              }
+              @if (f['codigoPostal'].errors?.['pattern']) {
+                <span class="error">Ingresa 5 dígitos.</span>
+              }
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h3>Método de pago</h3>
+
+        <div class="campo">
+          <label>Selecciona</label>
+          <select formControlName="metodoPago">
+            <option value="">-- Elige un método --</option>
+            <option value="tarjeta">Tarjeta de crédito/débito</option>
+            <option value="transferencia">Transferencia bancaria</option>
+            <option value="efectivo">Pago en efectivo (OXXO)</option>
+          </select>
+          @if (f['metodoPago'].invalid && f['metodoPago'].touched) {
+            <span class="error">Selecciona un método de pago.</span>
+          }
+        </div>
+      </div>
+
+      <button type="submit" class="btn-confirmar">
+       Confirmar pedido — {{ total | precio }}
+      </button>
+
+    </form>
+  }
+
+</div>

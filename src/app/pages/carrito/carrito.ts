@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { CarritoService, ItemCarrito } from '../../services/carrito';
 import { Router, RouterLink } from '@angular/router';
+import { PrecioPipe } from '../../pipes/precio-pipe';
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, PrecioPipe],
   templateUrl: './carrito.html',
   styleUrl: './carrito.css'
 })

@@ -1,6 +1,6 @@
 <div class="card" (click)="verDetalle()">
   <img [src]="producto.imagen" [alt]="producto.nombre">
   <h3>{{ producto.nombre }}</h3>
-  <p>$ {{ producto.precio }}</p>
+  <p>{{ producto.precio | precio }}</p>
   <button (click)="agregar($event)">Agregar al carrito</button>
 </div>

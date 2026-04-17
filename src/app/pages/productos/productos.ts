@@ -3,6 +3,7 @@ import { ProductosService } from '../../services/productos';
 import { Producto } from '../../models/producto';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductoCard } from '../../components/producto-card/producto-card';
+import { PrecioPipe } from '../../pipes/precio-pipe';
 
 @Component({
   selector: 'app-productos',

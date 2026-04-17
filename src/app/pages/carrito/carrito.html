@@ -12,8 +12,10 @@
     <img [src]="item.producto.imagen" [alt]="item.producto.nombre">
     <div class="item-info">
       <h3>{{ item.producto.nombre }}</h3>
-      <p>$ {{ item.producto.precio }} × {{ item.cantidad }}</p>
-      <p class="subtotal">Subtotal: $ {{ item.producto.precio * item.cantidad }}</p>
+      <p>{{ item.producto.precio | precio }} × {{ item.cantidad }}</p>
+      <p class="subtotal">
+        Subtotal: {{ item.producto.precio * item.cantidad | precio }}
+      </p>
     </div>
     <button class="btn-eliminar" (click)="eliminar(item.producto.id)">✕</button>
   </div>
@@ -21,7 +23,7 @@
 
 @if (items.length > 0) {
   <div class="resumen">
-    <p class="total">Total: $ {{ total }}</p>
+    <p class="total">Total: {{ total | precio }}</p>
     <button class="btn-limpiar" (click)="limpiar()">Vaciar carrito</button>
     <button class="btn-checkout" (click)="irCheckout()">Proceder al pago</button>
   </div>

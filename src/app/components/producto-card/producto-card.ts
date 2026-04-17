@@ -2,11 +2,12 @@ import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { Producto } from '../../models/producto';
 import { CarritoService } from '../../services/carrito';
 import { Router } from '@angular/router';
+import { PrecioPipe } from '../../pipes/precio-pipe';
 
 @Component({
   selector: 'app-producto-card',
   standalone: true,
-  imports: [],
+  imports: [PrecioPipe],
   templateUrl: './producto-card.html',
   styleUrl: './producto-card.css'
 })

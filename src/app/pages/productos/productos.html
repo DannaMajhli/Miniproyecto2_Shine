@@ -1,28 +1,20 @@
 <h2>Productos</h2>
 
+<div class="filtros">
+  <button (click)="mostrarTodos()" [class.activo]="categoriaActiva === ''">Todos</button>
+  <button (click)="filtrar('mujer')" [class.activo]="categoriaActiva === 'mujer'">Mujer</button>
+  <button (click)="filtrar('hombre')" [class.activo]="categoriaActiva === 'hombre'">Hombre</button>
+</div>
+
 <div class="grid">
-
   @for (producto of productos; track producto.id) {
-    
-    <div class="card">
+    <div class="card" (click)="verDetalle(producto.id)">
       <img [src]="producto.imagen" alt="">
-
       <h3>{{ producto.nombre }}</h3>
       <p>$ {{ producto.precio }}</p>
-
-      <button (click)="agregar()">
+      <button (click)="agregar(); $event.stopPropagation()">
         Agregar al carrito
       </button>
     </div>
-
   }
-
 </div>
-
-@for (p of productos; track p.id) {
-  <div class="card" (click)="verDetalle(p.id)">
-    <img [src]="p.imagen" width="150">
-    <h3>{{ p.nombre }}</h3>
-    <p>$ {{ p.precio }}</p>
-  </div>
-}

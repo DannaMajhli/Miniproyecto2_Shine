@@ -37,4 +37,8 @@ export class ProductosService {
   getProductoById(id: number) {
   return this.productos.find(p => p.id === id);
 }
+
+getByCategoria(categoria: string) {
+    return this.productos.filter(p => p.categoria === categoria);
+  }
 }

@@ -1,16 +1,13 @@
-<nav class="navbar navbar-dark bg-dark p-3">
-  <span class="navbar-brand">Shine</span>
+<nav class="navbar navbar-dark bg-dark p-3 d-flex justify-content-between">
+  <span class="navbar-brand fw-bold">Shine</span>
 
-  <div>
-   <a (click)="irInicio()" class="text-white m-2">Inicio</a>
-
-    <!-- Categorías -->
-    <a (click)="irCategoria('mujer')" class="text-white m-2">Mujer</a>
-    <a (click)="irCategoria('hombre')" class="text-white m-2">Hombre</a>
-    <a (click)="irCategoria('niños')" class="text-white m-2">Niños</a>
-
-    <a routerLink="/carrito" class="text-white m-2">Carrito</a>
-    <a routerLink="/contacto" class="text-white m-2">Contacto</a>
+  <div class="d-flex gap-3">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="text-white text-decoration-none">Inicio</a>
+    <a [routerLink]="['/productos']" [queryParams]="{categoria:'mujer'}" routerLinkActive="active" class="text-white text-decoration-none">Mujer</a>
+    <a [routerLink]="['/productos']" [queryParams]="{categoria:'hombre'}" routerLinkActive="active" class="text-white text-decoration-none">Hombre</a>
+    <a [routerLink]="['/productos']" [queryParams]="{categoria:'niños'}" routerLinkActive="active" class="text-white text-decoration-none">Niños</a>
+    <a routerLink="/carrito" routerLinkActive="active" class="text-white text-decoration-none">Carrito</a>
+    <a routerLink="/contacto" routerLinkActive="active" class="text-white text-decoration-none">Contacto</a>
   </div>
 </nav>
 

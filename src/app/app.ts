@@ -1,25 +1,13 @@
-import { Component, signal, inject } from '@angular/core';
-import { RouterOutlet, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-
-  protected readonly title = signal('shine');
-
-  private router = inject(Router);
-
-  irCategoria(categoria: string) {
-    this.router.navigate(['/productos'], {
-      queryParams: { categoria: categoria }
-    });
-  }
-
-  irInicio() {
-  this.router.navigate(['/']);
-}
+  title = 'shine';
 }

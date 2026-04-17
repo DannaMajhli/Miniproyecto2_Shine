@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { ProductosService } from '../../services/productos';
 import { Producto } from '../../models/producto';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ProductoCard } from '../../components/producto-card/producto-card';
 
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [],
+  imports: [ProductoCard],
   templateUrl: './productos.html',
   styleUrl: './productos.css'
 })
@@ -18,17 +19,15 @@ export class Productos {
 
   productos: Producto[] = [];
   categoriaActiva: string = '';
+  mensajeConfirmacion: string = '';
 
   ngOnInit() {
     this.ruta.queryParamMap.subscribe(params => {
       const categoria = params.get('categoria');
       this.categoriaActiva = categoria ?? '';
-
-      if (categoria) {
-        this.productos = this.servicio.getByCategoria(categoria);
-      } else {
-        this.productos = this.servicio.getProductos();
-      }
+      this.productos = categoria
+        ? this.servicio.getByCategoria(categoria)
+        : this.servicio.getProductos();
     });
   }
 
@@ -40,11 +39,8 @@ export class Productos {
     this.router.navigate(['/productos']);
   }
 
-  agregar() {
-    alert('Producto agregado 🛒');
-  }
-
-  verDetalle(id: number) {
-    this.router.navigate(['/producto', id]);
+  onAgregado(producto: Producto) {
+    this.mensajeConfirmacion = `"${producto.nombre}" agregado al carrito`;
+    setTimeout(() => this.mensajeConfirmacion = '', 2500);
   }
 }

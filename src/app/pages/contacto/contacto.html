@@ -1,1 +1,84 @@
-<p>contacto works!</p>
+<div class="contacto-wrap">
+  <h2>Contacto</h2>
+  <p class="subtitulo">¿Tienes alguna pregunta? Escríbenos.</p>
+
+  @if (enviado) {
+    <div class="toast-exito">
+      Mensaje enviado correctamente. ¡Gracias!
+    </div>
+  }
+
+  <form #contactoForm="ngForm" (ngSubmit)="enviar(contactoForm)" novalidate>
+
+    <div class="campo">
+      <label for="nombre">Nombre</label>
+      <input
+        id="nombre"
+        name="nombre"
+        type="text"
+        [(ngModel)]="nombre"
+        required
+        minlength="2"
+        #campoNombre="ngModel"
+        placeholder="Tu nombre completo">
+      @if (campoNombre.invalid && campoNombre.touched) {
+        @if (campoNombre.errors?.['required']) {
+          <span class="error">El nombre es obligatorio.</span>
+        }
+        @if (campoNombre.errors?.['minlength']) {
+          <span class="error">Mínimo 2 caracteres.</span>
+        }
+      }
+    </div>
+
+    <div class="campo">
+      <label for="email">Correo electrónico</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        [(ngModel)]="email"
+        required
+        email
+        #campoEmail="ngModel"
+        placeholder="tucorreo@email.com">
+      @if (campoEmail.invalid && campoEmail.touched) {
+        @if (campoEmail.errors?.['required']) {
+          <span class="error">El correo es obligatorio.</span>
+        }
+        @if (campoEmail.errors?.['email']) {
+          <span class="error">Ingresa un correo válido.</span>
+        }
+      }
+    </div>
+
+    <div class="campo">
+      <label for="mensaje">Mensaje</label>
+      <textarea
+        id="mensaje"
+        name="mensaje"
+        [(ngModel)]="mensaje"
+        required
+        minlength="10"
+        maxlength="300"
+        #campoMensaje="ngModel"
+        placeholder="Escribe tu mensaje aquí..."
+        rows="5">
+      </textarea>
+      @if (campoMensaje.invalid && campoMensaje.touched) {
+        @if (campoMensaje.errors?.['required']) {
+          <span class="error">El mensaje es obligatorio.</span>
+        }
+        @if (campoMensaje.errors?.['minlength']) {
+          <span class="error">Mínimo 10 caracteres.</span>
+        }
+      }
+      <span class="contador">{{ mensaje.length }}/300</span>
+    </div>
+
+    <button type="submit" [disabled]="contactoForm.invalid">
+      Enviar mensaje
+    </button>
+
+  </form>
+</div>

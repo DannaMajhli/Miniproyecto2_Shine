@@ -1,9 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
+import { Producto } from '../../models/producto';
+import { CarritoService } from '../../services/carrito';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-producto-card',
+  standalone: true,
   imports: [],
   templateUrl: './producto-card.html',
-  styleUrl: './producto-card.css',
+  styleUrl: './producto-card.css'
 })
-export class ProductoCard {}
+export class ProductoCard {
+
+  @Input() producto!: Producto;
+  @Output() agregado = new EventEmitter<Producto>();
+
+  private carritoService = inject(CarritoService);
+  private router = inject(Router);
+
+  agregar(event: Event) {
+    event.stopPropagation();
+    this.carritoService.agregar(this.producto);
+    this.agregado.emit(this.producto);
+  }
+
+  verDetalle() {
+    this.router.navigate(['/producto', this.producto.id]);
+  }
+}

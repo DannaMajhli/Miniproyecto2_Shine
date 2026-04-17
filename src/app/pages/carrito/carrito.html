@@ -1,1 +1,28 @@
-<p>carrito works!</p>
+<h2>Mi carrito</h2>
+
+@if (items.length === 0) {
+  <div class="vacio">
+    <p>Tu carrito está vacío</p>
+    <button routerLink="/productos">Ver productos</button>
+  </div>
+}
+
+@for (item of items; track item.producto.id) {
+  <div class="item">
+    <img [src]="item.producto.imagen" [alt]="item.producto.nombre">
+    <div class="item-info">
+      <h3>{{ item.producto.nombre }}</h3>
+      <p>$ {{ item.producto.precio }} × {{ item.cantidad }}</p>
+      <p class="subtotal">Subtotal: $ {{ item.producto.precio * item.cantidad }}</p>
+    </div>
+    <button class="btn-eliminar" (click)="eliminar(item.producto.id)">✕</button>
+  </div>
+}
+
+@if (items.length > 0) {
+  <div class="resumen">
+    <p class="total">Total: $ {{ total }}</p>
+    <button class="btn-limpiar" (click)="limpiar()">Vaciar carrito</button>
+    <button class="btn-checkout" (click)="irCheckout()">Proceder al pago</button>
+  </div>
+}

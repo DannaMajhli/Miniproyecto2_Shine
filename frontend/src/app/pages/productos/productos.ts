@@ -1,47 +1,42 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ProductosService } from '../../services/productos';
 import { Producto } from '../../models/producto';
-import { Router, ActivatedRoute } from '@angular/router';
+import { RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProductoCard } from '../../components/producto-card/producto-card';
-import { PrecioPipe } from '../../pipes/precio-pipe';
 
 @Component({
   selector: 'app-productos',
-  standalone: true,
-  imports: [ProductoCard],
+  imports: [RouterLink, ProductoCard],
   templateUrl: './productos.html',
   styleUrl: './productos.css'
 })
-export class Productos {
-
+export class Productos implements OnInit {
   private servicio = inject(ProductosService);
-  private router = inject(Router);
-  private ruta = inject(ActivatedRoute);
+  private route = inject(ActivatedRoute);
 
   productos: Producto[] = [];
-  categoriaActiva: string = '';
-  mensajeConfirmacion: string = '';
+  ultimoAgregado: string = '';   // para mostrar feedback del @Output
 
   ngOnInit() {
-    this.ruta.queryParamMap.subscribe(params => {
+    this.route.queryParamMap.subscribe(params => {
       const categoria = params.get('categoria');
-      this.categoriaActiva = categoria ?? '';
-      this.productos = categoria
-        ? this.servicio.getByCategoria(categoria)
-        : this.servicio.getProductos();
+
+      this.servicio.getProductos().subscribe(data => {
+        if (categoria) {
+          this.productos = data.filter(p => p.categoria === categoria);
+        } else {
+          this.productos = data;
+        }
+      });
     });
   }
 
-  filtrar(categoria: string) {
-    this.router.navigate(['/productos'], { queryParams: { categoria } });
-  }
-
-  mostrarTodos() {
-    this.router.navigate(['/productos']);
-  }
-
   onAgregado(producto: Producto) {
-    this.mensajeConfirmacion = `"${producto.nombre}" agregado al carrito`;
-    setTimeout(() => this.mensajeConfirmacion = '', 2500);
+    // Aquí capturas el @Output de la card
+    this.ultimoAgregado = producto.nombre;
+
+    // Limpiar el mensaje después de 2 segundos
+    setTimeout(() => this.ultimoAgregado = '', 2000);
   }
 }

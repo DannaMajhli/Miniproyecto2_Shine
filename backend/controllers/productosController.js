@@ -12,7 +12,7 @@ export const getProductos = async (req, res) => {
 export const getProductoPorId = async (req, res) => {
   try {
     const producto = await Modelo.obtenerPorId(req.params.id);
-    if (!producto) return res.status(404).json({ mensaje: 'No encontrado' });
+    if (!producto) return res.status(404).json({ mensaje: 'Producto no encontrado' });
     res.json(producto);
   } catch (err) {
     res.status(500).json({ error: err.message });

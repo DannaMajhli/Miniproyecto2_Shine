@@ -1,30 +1,50 @@
-<h2>Mi carrito</h2>
+<div class="container mt-4">
+  <h2 class="mb-4">Mi carrito</h2>
 
-@if (items.length === 0) {
-  <div class="vacio">
-    <p>Tu carrito está vacío</p>
-    <button routerLink="/productos">Ver productos</button>
-  </div>
-}
-
-@for (item of items; track item.producto.id) {
-  <div class="item">
-    <img [src]="item.producto.imagen" [alt]="item.producto.nombre">
-    <div class="item-info">
-      <h3>{{ item.producto.nombre }}</h3>
-      <p>{{ item.producto.precio | precio }} × {{ item.cantidad }}</p>
-      <p class="subtotal">
-        Subtotal: {{ item.producto.precio * item.cantidad | precio }}
-      </p>
+  @if (items.length === 0) {
+    <div class="text-center py-5">
+      <p class="text-muted fs-5">Tu carrito está vacío</p>
+      <a routerLink="/productos" class="btn btn-dark">Ver productos</a>
     </div>
-    <button class="btn-eliminar" (click)="eliminar(item.producto.id)">✕</button>
-  </div>
-}
+  }
 
-@if (items.length > 0) {
-  <div class="resumen">
-    <p class="total">Total: {{ total | precio }}</p>
-    <button class="btn-limpiar" (click)="limpiar()">Vaciar carrito</button>
-    <button class="btn-checkout" (click)="irCheckout()">Proceder al pago</button>
-  </div>
-}
+  @for (item of items; track item.producto.id) {
+    <div class="card mb-3">
+      <div class="row g-0 align-items-center">
+        <div class="col-md-2">
+          <img [src]="item.producto.img" [alt]="item.producto.nombre"
+               class="img-fluid rounded-start" style="height:100px; object-fit:cover">
+        </div>
+        <div class="col-md-8 p-3">
+          <h5>{{ item.producto.nombre }}</h5>
+          <p class="text-muted mb-1">
+            {{ item.producto.precio | precio }} × {{ item.cantidad }}
+          </p>
+          <p class="fw-bold mb-0">
+            Subtotal: {{ item.producto.precio * item.cantidad | precio }}
+          </p>
+        </div>
+        <div class="col-md-2 text-center">
+          <button class="btn btn-outline-danger btn-sm" (click)="eliminar(item.producto.id)">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (items.length > 0) {
+    <div class="card p-4 mt-3">
+      <h4 class="fw-bold">Total: {{ total | precio }}</h4>
+      <div class="d-flex gap-2 mt-3">
+        <button class="btn btn-outline-secondary" (click)="limpiar()">
+          Vaciar carrito
+        </button>
+        <button class="btn btn-dark" (click)="irCheckout()">
+          Proceder al pago
+        </button>
+      </div>
+    </div>
+  }
+
+</div>

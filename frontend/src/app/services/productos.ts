@@ -1,44 +1,22 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Producto } from '../models/producto';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class ProductosService {
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:3000/api';
 
-  productos: Producto[] = [
-    {
-      id: 1,
-      nombre: 'Blusa negra elegante',
-      precio: 299,
-      imagen: 'https://via.placeholder.com/150',
-      categoria: 'mujer'
-    },
-    {
-      id: 2,
-      nombre: 'Vestido floral',
-      precio: 450,
-      imagen: 'https://via.placeholder.com/150',
-      categoria: 'mujer'
-    },
-    {
-      id: 3,
-      nombre: 'Sudadera oversize',
-      precio: 399,
-      imagen: 'https://via.placeholder.com/150',
-      categoria: 'hombre'
-    }
-  ];
-
-  getProductos() {
-    return this.productos;
+  getProductos(): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.apiUrl}/productos`);
   }
 
-  getProductoById(id: number) {
-  return this.productos.find(p => p.id === id);
-}
+  getProductoPorId(id: number): Observable<Producto> {
+    return this.http.get<Producto>(`${this.apiUrl}/productos/${id}`);
+  }
 
-getByCategoria(categoria: string) {
-    return this.productos.filter(p => p.categoria === categoria);
+  crearProducto(producto: Producto): Observable<any> {
+    return this.http.post(`${this.apiUrl}/productos`, producto);
   }
 }

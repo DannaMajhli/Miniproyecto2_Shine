@@ -1,20 +1,18 @@
-<h2>Productos</h2>
+<h2 class="mb-4">Productos</h2>
 
-<div class="filtros">
-  <button (click)="mostrarTodos()" [class.activo]="categoriaActiva === ''">Todos</button>
-  <button (click)="filtrar('mujer')" [class.activo]="categoriaActiva === 'mujer'">Mujer</button>
-  <button (click)="filtrar('hombre')" [class.activo]="categoriaActiva === 'hombre'">Hombre</button>
-</div>
-
-@if (mensajeConfirmacion) {
-  <div class="toast">{{ mensajeConfirmacion }}</div>
+@if (ultimoAgregado) {
+  <div class="alert alert-success">
+    ✅ {{ ultimoAgregado }} agregado al carrito
+  </div>
 }
 
-<div class="grid">
+<div class="row">
   @for (producto of productos; track producto.id) {
-    <app-producto-card
-      [producto]="producto"
-      (agregado)="onAgregado($event)">
-    </app-producto-card>
+    <div class="col-md-4 mb-4">
+      <app-producto-card
+        [producto]="producto"
+        (agregado)="onAgregado($event)">
+      </app-producto-card>
+    </div>
   }
 </div>

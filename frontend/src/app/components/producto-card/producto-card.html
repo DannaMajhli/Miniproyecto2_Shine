@@ -1,6 +1,13 @@
-<div class="card" (click)="verDetalle()">
-  <img [src]="producto.imagen" [alt]="producto.nombre">
-  <h3>{{ producto.nombre }}</h3>
-  <p>{{ producto.precio | precio }}</p>
-  <button (click)="agregar($event)">Agregar al carrito</button>
+<div class="card h-100 shadow-sm" style="cursor:pointer" (click)="verDetalle()">
+  <img [src]="producto.img" [alt]="producto.nombre" class="card-img-top" style="height:200px; object-fit:cover">
+  
+  <div class="card-body d-flex flex-column">
+    <h5 class="card-title">{{ producto.nombre }}</h5>
+    <p class="card-text text-muted small">{{ producto.descripcion }}</p>
+    <p class="fw-bold mt-auto">{{ producto.precio | precio }}</p>
+
+    <button class="btn btn-dark w-100 mt-2" (click)="agregar($event)">
+      Agregar al carrito
+    </button>
+  </div>
 </div>

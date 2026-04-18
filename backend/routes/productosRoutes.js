@@ -3,8 +3,8 @@ import { getProductos, getProductoPorId, postProducto } from '../controllers/pro
 
 const router = Router();
 
-router.get('/productos', getProductos);          // GET todos
-router.get('/productos/:id', getProductoPorId);  // GET por ID
-router.post('/productos', postProducto);         // POST nuevo
+router.get('/productos', getProductos);
+router.get('/productos/:id', getProductoPorId);
+router.post('/productos', postProducto);
 
 export default router;

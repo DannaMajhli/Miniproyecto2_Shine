@@ -1,42 +1,51 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { ProductosService } from '../../services/productos';
 import { Producto } from '../../models/producto';
-import { RouterLink } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoCard } from '../../components/producto-card/producto-card';
+import { Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-productos',
-  imports: [RouterLink, ProductoCard],
+  imports: [ProductoCard],
   templateUrl: './productos.html',
   styleUrl: './productos.css'
 })
-export class Productos implements OnInit {
+export class Productos implements OnInit, OnDestroy {
   private servicio = inject(ProductosService);
   private route = inject(ActivatedRoute);
 
   productos: Producto[] = [];
-  ultimoAgregado: string = '';   // para mostrar feedback del @Output
+  ultimoAgregado: string = '';
+  private sub!: Subscription;
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(params => {
-      const categoria = params.get('categoria');
-
-      this.servicio.getProductos().subscribe(data => {
-        if (categoria) {
-          this.productos = data.filter(p => p.categoria === categoria);
-        } else {
-          this.productos = data;
-        }
-      });
+    this.sub = this.route.queryParamMap.pipe(
+      switchMap(params => {
+        const categoria = params.get('categoria');
+        console.log('CATEGORIA RECIBIDA:', categoria);
+        this.productos = [];
+        return this.servicio.getProductos();
+      })
+    ).subscribe(data => {
+      const categoria = this.route.snapshot.queryParamMap.get('categoria');
+      console.log('DATOS RECIBIDOS:', data.length, 'FILTRANDO POR:', categoria);
+      if (categoria) {
+        this.productos = [...data.filter(p => p.categoria === categoria)];
+      } else {
+        this.productos = [...data];
+      }
+      console.log('PRODUCTOS FINALES:', this.productos.length);
     });
   }
 
-  onAgregado(producto: Producto) {
-    // Aquí capturas el @Output de la card
-    this.ultimoAgregado = producto.nombre;
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 
-    // Limpiar el mensaje después de 2 segundos
+  onAgregado(producto: Producto) {
+    this.ultimoAgregado = producto.nombre;
     setTimeout(() => this.ultimoAgregado = '', 2000);
   }
 }

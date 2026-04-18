@@ -5,9 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true
 })
 export class PrecioPipe implements PipeTransform {
-
   transform(valor: number): string {
-    return `$${valor.toFixed(2)}`;
+    return `$${Number(valor).toFixed(2)}`;  // <-- agrega Number()
   }
-
 }

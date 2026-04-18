@@ -3,11 +3,12 @@ import { Producto } from '../../models/producto';
 import { CarritoService } from '../../services/carrito';
 import { Router } from '@angular/router';
 import { PrecioPipe } from '../../pipes/precio-pipe';
+import { ImagenPipe } from '../../pipes/imagen-pipe';
 
 @Component({
   selector: 'app-producto-card',
   standalone: true,
-  imports: [PrecioPipe],
+  imports: [PrecioPipe, ImagenPipe],
   templateUrl: './producto-card.html',
   styleUrl: './producto-card.css'
 })

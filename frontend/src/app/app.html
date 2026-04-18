@@ -5,7 +5,7 @@
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="text-white text-decoration-none">Inicio</a>
     <a [routerLink]="['/productos']" [queryParams]="{categoria:'mujer'}" routerLinkActive="active" class="text-white text-decoration-none">Mujer</a>
     <a [routerLink]="['/productos']" [queryParams]="{categoria:'hombre'}" routerLinkActive="active" class="text-white text-decoration-none">Hombre</a>
-    <a [routerLink]="['/productos']" [queryParams]="{categoria:'niños'}" routerLinkActive="active" class="text-white text-decoration-none">Niños</a>
+    <a [routerLink]="['/productos']" [queryParams]="{categoria:'niño'}" routerLinkActive="active" class="text-white text-decoration-none">Niño</a>
     <a routerLink="/carrito" routerLinkActive="active" class="text-white text-decoration-none">
        Carrito ({{ carritoService.contador() }})
     </a>

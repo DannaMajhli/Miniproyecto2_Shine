@@ -1,1 +1,50 @@
-<p>Aquí van las ofertas</p>
+<!-- BANNER -->
+<div class="banner" [style.backgroundImage]="'url(/banner.jpg)'">
+  <div class="banner-overlay">
+    <h1 class="banner-titulo">Shine</h1>
+    <p class="banner-subtitulo">Moda para toda la familia</p>
+    <button class="btn-banner" (click)="irCategoria('')">Ver colección</button>
+  </div>
+</div>
+
+<!-- CATEGORÍAS -->
+<section class="categorias">
+  <h2 class="seccion-titulo">Categorías</h2>
+  <div class="categorias-grid">
+
+    <div class="categoria-card" (click)="irCategoria('mujer')"
+     style="background-image: url('/categoriamujer.jpg'); background-size: cover; background-position: center;">
+  <div class="categoria-overlay">
+    <span>Mujer</span>
+  </div>
+</div>
+
+<div class="categoria-card" (click)="irCategoria('hombre')"
+     style="background-image: url('/categoriahombre.jpg'); background-size: cover; background-position: center;">
+  <div class="categoria-overlay">
+    <span>Hombre</span>
+  </div>
+</div>
+
+<div class="categoria-card" (click)="irCategoria('niño')"
+     style="background-image: url('/categorianino.jpg'); background-size: cover; background-position: center;">
+  <div class="categoria-overlay">
+    <span>Niño</span>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<!-- DESTACADOS -->
+<section class="destacados">
+  <h2 class="seccion-titulo">Productos destacados</h2>
+  <div class="destacados-grid">
+    @for (producto of destacados(); track producto.id) {
+  <app-producto-card
+    [producto]="producto"
+    (agregado)="irCategoria('')">
+  </app-producto-card>
+}
+  </div>
+</section>

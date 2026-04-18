@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { ProductosService } from '../../services/productos';
 import { Producto } from '../../models/producto';
 import { ActivatedRoute } from '@angular/router';
@@ -16,27 +16,24 @@ export class Productos implements OnInit, OnDestroy {
   private servicio = inject(ProductosService);
   private route = inject(ActivatedRoute);
 
-  productos: Producto[] = [];
-  ultimoAgregado: string = '';
+  productos = signal<Producto[]>([]);
+  ultimoAgregado = signal('');
   private sub!: Subscription;
 
   ngOnInit() {
     this.sub = this.route.queryParamMap.pipe(
       switchMap(params => {
         const categoria = params.get('categoria');
-        console.log('CATEGORIA RECIBIDA:', categoria);
-        this.productos = [];
+        this.productos.set([]);
         return this.servicio.getProductos();
       })
     ).subscribe(data => {
       const categoria = this.route.snapshot.queryParamMap.get('categoria');
-      console.log('DATOS RECIBIDOS:', data.length, 'FILTRANDO POR:', categoria);
       if (categoria) {
-        this.productos = [...data.filter(p => p.categoria === categoria)];
+        this.productos.set(data.filter(p => p.categoria === categoria));
       } else {
-        this.productos = [...data];
+        this.productos.set([...data]);
       }
-      console.log('PRODUCTOS FINALES:', this.productos.length);
     });
   }
 
@@ -45,7 +42,7 @@ export class Productos implements OnInit, OnDestroy {
   }
 
   onAgregado(producto: Producto) {
-    this.ultimoAgregado = producto.nombre;
-    setTimeout(() => this.ultimoAgregado = '', 2000);
+    this.ultimoAgregado.set(producto.nombre);
+    setTimeout(() => this.ultimoAgregado.set(''), 2000);
   }
 }

@@ -1,0 +1,121 @@
+/* BANNER */
+.banner {
+  height: 520px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-overlay {
+  background: rgba(62, 72, 52, 0.55);
+  padding: 3rem 4rem;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.banner-titulo {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #f5f0e8;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+}
+
+.banner-subtitulo {
+  color: #e8e0d0;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.btn-banner {
+  background: #f5f0e8;
+  color: #3e4834;
+  padding: 12px 36px;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.btn-banner:hover {
+  background: #3e4834;
+  color: #f5f0e8;
+}
+
+/* SECCIÓN TÍTULO */
+.seccion-titulo {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #3e4834;
+  margin: 3rem 0 1.5rem;
+}
+
+/* CATEGORÍAS */
+.categorias {
+  background: #f5f0e8;
+  padding-bottom: 3rem;
+}
+
+.categorias-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.categoria-card {
+  height: 200px;
+  background: #7a8c6e;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.categoria-card:hover {
+  transform: scale(1.02);
+}
+
+.categoria-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(62, 72, 52, 0.7);
+  padding: 1rem;
+  text-align: center;
+}
+
+.categoria-overlay span {
+  color: #f5f0e8;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* DESTACADOS */
+.destacados {
+  padding-bottom: 3rem;
+  background: #fff;
+}
+
+.destacados-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}

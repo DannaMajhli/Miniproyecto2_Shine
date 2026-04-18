@@ -2,18 +2,18 @@
   <h2 class="mb-4">Mi carrito</h2>
 
   @if (items.length === 0) {
-    <div class="text-center py-5">
-      <p class="text-muted fs-5">Tu carrito está vacío</p>
-      <a routerLink="/productos" class="btn btn-dark">Ver productos</a>
-    </div>
-  }
+  <div class="text-center py-5">
+    <h4 class="text-muted">Tu carrito está vacío</h4>
+    <p class="text-muted">Explora nuestras categorías en el menú superior</p>
+  </div>
+}
 
   @for (item of items; track item.producto.id) {
     <div class="card mb-3">
       <div class="row g-0 align-items-center">
         <div class="col-md-2">
-          <img [src]="item.producto.img" [alt]="item.producto.nombre"
-               class="img-fluid rounded-start" style="height:100px; object-fit:cover">
+          <img [src]="item.producto.img | imagen" [alt]="item.producto.nombre"
+            class="img-fluid rounded-start" style="height:100px; object-fit:cover">
         </div>
         <div class="col-md-8 p-3">
           <h5>{{ item.producto.nombre }}</h5>

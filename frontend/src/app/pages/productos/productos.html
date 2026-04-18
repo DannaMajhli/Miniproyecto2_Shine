@@ -1,13 +1,13 @@
 <h2 class="mb-4">Productos</h2>
 
-@if (ultimoAgregado) {
+@if (ultimoAgregado()) {
   <div class="alert alert-success">
-    ✅ {{ ultimoAgregado }} agregado al carrito
+    ✅ {{ ultimoAgregado() }} agregado al carrito
   </div>
 }
 
 <div class="row">
-  @for (producto of productos; track producto.id) {
+  @for (producto of productos(); track producto.id) {
     <div class="col-md-4 mb-4">
       <app-producto-card
         [producto]="producto"

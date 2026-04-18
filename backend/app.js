@@ -8,6 +8,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use('/img', express.static('img'));
 app.use('/api', productosRoutes);
 
 const PORT = process.env.PORT || 3000;

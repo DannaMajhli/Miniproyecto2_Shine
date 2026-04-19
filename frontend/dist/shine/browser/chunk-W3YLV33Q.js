@@ -1,0 +1,1 @@
+import{a as t}from"./chunk-HKUIW3PS.js";import{Ca as i}from"./chunk-3UMPVTCM.js";var n=class r{transform(e){return`${t.apiUrl}/${e}`}static \u0275fac=function(m){return new(m||r)};static \u0275pipe=i({name:"imagen",type:r,pure:!0})};export{n as a};

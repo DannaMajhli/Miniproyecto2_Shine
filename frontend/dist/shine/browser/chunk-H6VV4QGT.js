@@ -1,0 +1,1 @@
+import{Ca as i}from"./chunk-3UMPVTCM.js";var t=class r{transform(e){return`$${Number(e).toFixed(2)}`}static \u0275fac=function(n){return new(n||r)};static \u0275pipe=i({name:"precio",type:r,pure:!0})};export{t as a};

@@ -2,12 +2,17 @@
   <h2>Contacto</h2>
   <p class="subtitulo">¿Tienes alguna pregunta? Escríbenos.</p>
 
-  @if (enviado) {
-    <div class="toast-exito">
-      Mensaje enviado correctamente. ¡Gracias!
-    </div>
-  }
+  @if (enviado()) {
+  <div class="toast-exito">
+    Mensaje enviado correctamente. ¡Gracias!
+  </div>
+}
 
+@if (error()) {
+  <div class="toast-error">
+    Ocurrió un error al enviar. Intenta de nuevo.
+  </div>
+}
   <form #contactoForm="ngForm" (ngSubmit)="enviar(contactoForm)" novalidate>
 
     <div class="campo">
@@ -73,7 +78,7 @@
           <span class="error">Mínimo 10 caracteres.</span>
         }
       }
-      <span class="contador">{{ mensaje.length }}/300</span>
+      <span class="contador">{{ mensaje?.length || 0 }}/300</span>
     </div>
 
     <button type="submit" [disabled]="contactoForm.invalid">

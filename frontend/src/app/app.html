@@ -1,15 +1,24 @@
 <nav class="navbar navbar-dark bg-dark p-3 d-flex justify-content-between">
   <span class="navbar-brand fw-bold">Shine</span>
 
-  <div class="d-flex gap-3">
+  <div class="d-flex gap-3 align-items-center">
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="text-white text-decoration-none">Inicio</a>
     <a [routerLink]="['/productos']" [queryParams]="{categoria:'mujer'}" routerLinkActive="active" class="text-white text-decoration-none">Mujer</a>
     <a [routerLink]="['/productos']" [queryParams]="{categoria:'hombre'}" routerLinkActive="active" class="text-white text-decoration-none">Hombre</a>
     <a [routerLink]="['/productos']" [queryParams]="{categoria:'niño'}" routerLinkActive="active" class="text-white text-decoration-none">Niño</a>
     <a routerLink="/carrito" routerLinkActive="active" class="text-white text-decoration-none">
-       Carrito ({{ carritoService.contador() }})
+      Carrito ({{ carritoService.contador() }})
     </a>
     <a routerLink="/contacto" routerLinkActive="active" class="text-white text-decoration-none">Contacto</a>
+
+    @if (authService.estaLogueado()) {
+      <span class="text-white small">{{ authService.usuarioActivo() }}</span>
+      <button class="btn btn-outline-light btn-sm" (click)="authService.cerrarSesion()">
+        Salir
+      </button>
+    } @else {
+      <a routerLink="/login" class="text-white text-decoration-none">Login</a>
+    }
   </div>
 </nav>
 

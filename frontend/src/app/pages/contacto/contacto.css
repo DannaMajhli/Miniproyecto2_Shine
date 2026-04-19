@@ -91,3 +91,11 @@ button[type="submit"]:disabled {
   background: #999;
   cursor: not-allowed;
 }
+
+.toast-error {
+  background: #c0392b;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}

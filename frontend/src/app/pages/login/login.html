@@ -1,0 +1,47 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card p-4 shadow-sm">
+        <h3 class="text-center mb-4" style="color:#3e4834">Iniciar sesión</h3>
+
+        @if (error) {
+          <div class="alert alert-danger">
+            Correo o contraseña incorrectos.
+          </div>
+        }
+
+        <form [formGroup]="form" (ngSubmit)="ingresar()">
+          <div class="mb-3">
+            <label class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" formControlName="email">
+            @if (f['email'].invalid && f['email'].touched) {
+              @if (f['email'].errors?.['required']) {
+                <span class="text-danger small">El correo es obligatorio.</span>
+              }
+              @if (f['email'].errors?.['email']) {
+                <span class="text-danger small">Ingresa un correo válido.</span>
+              }
+            }
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Contraseña</label>
+            <input type="password" class="form-control" formControlName="password">
+            @if (f['password'].invalid && f['password'].touched) {
+              @if (f['password'].errors?.['required']) {
+                <span class="text-danger small">La contraseña es obligatoria.</span>
+              }
+              @if (f['password'].errors?.['minlength']) {
+                <span class="text-danger small">Mínimo 4 caracteres.</span>
+              }
+            }
+          </div>
+
+          <button type="submit" class="btn btn-dark w-100">
+            Entrar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

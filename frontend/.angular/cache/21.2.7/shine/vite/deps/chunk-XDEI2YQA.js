@@ -1,38 +1,49 @@
 import {
   withHttpTransferCache
-} from "./chunk-P5X6RCDU.js";
+} from "./chunk-DPDEU2ND.js";
 import {
   CommonModule,
   PLATFORM_BROWSER_ID
-} from "./chunk-AXXWSEV2.js";
+} from "./chunk-NUF3EWI3.js";
 import {
   DomAdapter,
   XhrFactory,
   getDOM,
   parseCookieValue,
   setRootDomAdapter
-} from "./chunk-BRB3SASA.js";
+} from "./chunk-KG3FGYLZ.js";
 import {
   APP_ID,
   ApplicationModule,
   ApplicationRef,
   CSP_NONCE,
   Console,
+  DOCUMENT,
+  ENVIRONMENT_INITIALIZER,
+  ErrorHandler,
+  INJECTOR_SCOPE,
   IS_ENABLED_BLOCKING_INITIAL_NAVIGATION,
   Inject,
   Injectable,
+  InjectionToken,
+  Injector,
   NgModule,
+  NgZone,
   Optional,
   PLATFORM_ID,
   PLATFORM_INITIALIZER,
   RendererFactory2,
   RendererStyleFlags2,
+  RuntimeError,
   SecurityContext,
   TESTABILITY,
   TESTABILITY_GETTER,
   Testability,
   TracingService,
+  Version,
   ViewEncapsulation,
+  XSS_SECURITY_URL,
+  _global,
   _sanitizeHtml,
   _sanitizeUrl,
   allLeavingAnimations,
@@ -43,7 +54,11 @@ import {
   bypassSanitizationTrustStyle,
   bypassSanitizationTrustUrl,
   createPlatformFactory,
+  formatRuntimeError,
+  forwardRef,
+  inject,
   internalCreateApplication,
+  makeEnvironmentProviders,
   platformCore,
   provideStabilityDebugging,
   setClassMetadata,
@@ -53,31 +68,14 @@ import {
   withEventReplay,
   withI18nSupport,
   withIncrementalHydration,
-  ɵɵdefineNgModule
-} from "./chunk-5KJDR3XE.js";
-import {
-  DOCUMENT,
-  ENVIRONMENT_INITIALIZER,
-  ErrorHandler,
-  INJECTOR_SCOPE,
-  InjectionToken,
-  Injector,
-  NgZone,
-  RuntimeError,
-  Version,
-  XSS_SECURITY_URL,
-  _global,
-  formatRuntimeError,
-  forwardRef,
-  inject,
-  makeEnvironmentProviders,
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
+  ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-6NUQPSJI.js";
+} from "./chunk-6PFSFEHP.js";
 import {
   __spreadValues
-} from "./chunk-GKZSDLI5.js";
+} from "./chunk-T2UPE7AW.js";
 
 // node_modules/@angular/platform-browser/fesm2022/_dom_renderer-chunk.mjs
 var EventManagerPlugin = class {
@@ -1748,4 +1746,4 @@ export {
   provideClientHydration,
   VERSION
 };
-//# sourceMappingURL=chunk-I4L3JD6T.js.map
+//# sourceMappingURL=chunk-XDEI2YQA.js.map

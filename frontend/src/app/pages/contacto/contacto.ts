@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ContactoService } from '../../services/contacto';
 
 @Component({
   selector: 'app-contacto',
@@ -11,20 +11,33 @@ import { Router } from '@angular/router';
 })
 export class Contacto {
 
-  private router = inject(Router);
+  private contactoService = inject(ContactoService);
 
   nombre: string = '';
   email: string = '';
   mensaje: string = '';
-  enviado: boolean = false;
+  enviado = signal(false);
+  error = signal(false);
 
   enviar(form: any) {
     if (form.valid) {
-      this.enviado = true;
-      setTimeout(() => {
-        this.enviado = false;
-        form.resetForm();
-      }, 3000);
+      this.contactoService.enviarMensaje({
+        nombre: this.nombre,
+        email: this.email,
+        mensaje: this.mensaje
+      }).subscribe({
+        next: () => {
+          this.enviado.set(true);
+          this.error.set(false);
+          setTimeout(() => {
+            this.enviado.set(false);
+            form.resetForm();
+          }, 5000);
+        },
+        error: () => {
+          this.error.set(true);
+        }
+      });
     }
   }
 }
